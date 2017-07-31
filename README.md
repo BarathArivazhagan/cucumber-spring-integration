@@ -61,11 +61,11 @@ Feature: To save the customer with customer details
 <b> Step 4 </b> : When you run this feature file Run as -> Cucumber it generated the BDD style of java code. 
 Using which you can write the service logic. 
 
-
+### SaveCustomerStepDefinitionTest.java : 
 ```
-SaveCustomerStepDefinitionTest.java: 
 
-@Given("^the customer with customer name \"([^\"]*)\" and customer id (\\d+)$")
+
+	@Given("^the customer with customer name \"([^\"]*)\" and customer id (\\d+)$")
 	public void the_customer_with_customer_name_and_customer_id(String customerName, int customerId) throws Throwable {
 	  
 		if(logger.isInfoEnabled()){
