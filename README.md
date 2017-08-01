@@ -3,6 +3,15 @@
 
 This example is about writing the cucumber test cases to test the spring boot application using BDD
 
+#### Pre-requisite: Install Cucumber Plugin into IDE :
+
+Go through the steps in the below url to install plugin
+
+http://toolsqa.com/cucumber/install-cucumber-eclipse-plugin/
+
+### Development Steps : 
+
+
 <b>Step1</b> : To start with cucumber : 
 
 Add the below dependencies to support Spring with Cucumber: 
@@ -58,7 +67,7 @@ Feature: To save the customer with customer details
 
 ```
 
-<b> Step 4 </b> : When you run this feature file Run as -> Cucumber it generated the BDD style of java code. 
+<b> Step 4 </b> : When you run this feature file Run as -> Cucumber it generates the BDD style of java code. 
 Using which you can write the service logic. 
 
 ### SaveCustomerStepDefinitionTest.java : 
