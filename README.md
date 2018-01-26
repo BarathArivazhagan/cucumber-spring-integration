@@ -113,8 +113,7 @@ Using which you can write the service logic.
 		if(response !=null && response.getStatusCode().is2xxSuccessful()){
 			String responseBody=response.getBody();
 			com.fasterxml.jackson.databind.ObjectMapper mapper= new com.fasterxml.jackson.databind.ObjectMapper();
-			Map<String,String> responseMap=mapper.readValue(responseBody, Map.class);
-			System.out.println(responseMap);
+			Map<String,String> responseMap=mapper.readValue(responseBody, Map.class);			
 			assertEquals(customerName,responseMap.get("customerName"));
 		}
 	}
