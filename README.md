@@ -1,5 +1,5 @@
 # cucumber-spring-integration
- ### Spring Boot application integrated with Cucumber Test cases
+ ### Spring Boot application integrated with cucumber Test cases
 
 This example is about writing the cucumber test cases to test the spring boot application using BDD
 
