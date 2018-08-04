@@ -1,7 +1,8 @@
 package com.barath.app.service;
 
+import java.lang.invoke.MethodHandles;
 import java.util.List;
-
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,12 +14,12 @@ import com.barath.app.repository.CustomerRepository;
 @Service
 public class CustomerService {
 	
-	private static final Logger logger=LoggerFactory.getLogger(CustomerService.class);
+	private static final Logger logger=LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 	
-	private CustomerRepository customerRepo=null;
+	private final CustomerRepository customerRepository;
 	
-	public CustomerService(CustomerRepository customerRepo) {
-		this.customerRepo=customerRepo;
+	public CustomerService(CustomerRepository customerRepository) {
+		this.customerRepository=customerRepository;
 	}
 	
 	
@@ -27,7 +28,7 @@ public class CustomerService {
 		if( logger.isInfoEnabled()){
 			logger.info("Customer is saved with details {}",customer.toString());
 		}
-		return customerRepo.save(customer);
+		return this.customerRepository.save(customer);
 	}
 	
 	public List<Customer> saveCustomers(List<Customer> customers){
@@ -35,32 +36,30 @@ public class CustomerService {
 		if( logger.isInfoEnabled()){
 			logger.info("Customer is saved with details {}",customers);
 		}
-		return customerRepo.save(customers);
+		return this.customerRepository.saveAll(customers);
 	}
 	
 	public Customer getCustomerWithName(String customerName){
 		
-		Customer customer=null;
 		if( logger.isInfoEnabled()){
 			logger.info("Getting Customer with name {}",customerName);
 		}	
-		customer= customerRepo.findByCustomerName(customerName);
-		return customer;
+		return this.customerRepository.findByCustomerName(customerName);
+		
 	}
 	
-	public Customer getCustomer(Long customerId){
+	public Optional<Customer> getCustomer(Long customerId){
 		
-		Customer customer=null;
 		if( logger.isInfoEnabled()){
 			logger.info("Getting Customer with Id {}",customerId);
 		}	
-		customer= customerRepo.findOne(customerId);
-		return customer;
+		return this.customerRepository.findById(customerId);
+		
 	}
 	
 	public List<Customer> getCustomers(){
 		
-		return customerRepo.findAll();
+		return this.customerRepository.findAll();
 	}
 
 }

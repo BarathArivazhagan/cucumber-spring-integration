@@ -1,29 +1,32 @@
-package com.barath.app.cucumber.test;
+package com.barath.app.bdd;
 
-import java.net.MalformedURLException;
+
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.barath.app.Application;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
-@SpringBootTest(classes=Application.class)
+@SpringBootTest(classes = Application.class, webEnvironment = WebEnvironment.DEFINED_PORT)
+@ContextConfiguration
 public abstract class AbstractSpringConfigurationTest {
 	
 	
 	@Autowired(required=false)
 	private TestRestTemplate restTemplate;
-	
+	protected ObjectMapper mapper = new ObjectMapper();
 	protected static final String HOST="localhost";
 	protected static final String PORT="8082";
 	

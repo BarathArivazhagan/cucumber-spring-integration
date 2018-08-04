@@ -1,4 +1,4 @@
-package com.barath.app.cucumber.test;
+package com.barath.app.bdd;
 
 import static org.junit.Assert.assertEquals;
 
