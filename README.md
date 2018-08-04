@@ -1,7 +1,7 @@
 # cucumber-spring-integration
- ### Spring Boot application integrated with cucumber Test cases
+ ### spring boot application integrated with cucumber test cases
 
-This example is about writing the cucumber test cases to test the spring boot application using BDD
+This guide is about writing the cucumber test cases to test the spring boot application using BDD style.
 
 #### Pre-requisite: Install Cucumber Plugin into IDE :
 
@@ -16,36 +16,39 @@ http://toolsqa.com/cucumber/install-cucumber-eclipse-plugin/
 
 Add the below dependencies to support Spring with Cucumber: 
 
-```
+``` 
+               <properties>		
+			<cucumber.version>1.2.5</cucumber.version>
+		</properties>
    		<dependency>
 			<groupId>info.cukes</groupId>
 			<artifactId>cucumber-java</artifactId>
-			<version>1.2.5</version>
+			<version>${cucumber.version}</version>
 			<scope>test</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>info.cukes</groupId>
 			<artifactId>cucumber-spring</artifactId>
-			<version>1.2.5</version>
+			<version>${cucumber.version}</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>info.cukes</groupId>
 			<artifactId>cucumber-junit</artifactId>
-			<version>1.2.5</version>
+			<version>${cucumber.version}</version>
 			<scope>test</scope>
 		</dependency>
 
 
 ```
 
-<b>Step 2</b>: Define the Cucumber Runner 
+<b>Step 2</b>: Define the Cucumber Runner Test
 
 ```
 @RunWith(Cucumber.class)
-@CucumberOptions(features = "src/test/resources")
-public class CucumberRunner {
+@CucumberOptions(features = "src/test/resources/features")
+public class CucumberRunnerTest {
 
 }
 
@@ -54,16 +57,16 @@ public class CucumberRunner {
 
 <b>Step 3 </b> : Create a feature file and define the BDD steps using gherkin language
 
-Example : Feature describing the scenario of saving a customer with customer details
+Example : Feature describing the scenario of creating a customer with customer details
 
 ```
-Feature: To save the customer with customer details	
-   Scenario: client makes call to POST /customer/save to save the customer
-	Given the customer with customer name "barath" and customer id 7777
-	When the client calls "/customer/save" with the given details
-	Then the client receives status code of 200
-	And the response contains customer name "barath"
+Feature: To save the customer with customer details
 
+  Scenario: client makes call to POST /customers/new to save the customer
+    Given the customer with customer name "barath" and customer id 7777
+    When the client calls "/customers/new" with the given details
+    Then the client receives status code of 200
+    And the response contains customer name "barath"
 
 ```
 
