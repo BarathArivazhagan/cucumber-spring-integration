@@ -1,0 +1,203 @@
+
+[[_paths]]
+== Paths
+
+[[_createcustomersusingpost]]
+=== createCustomers
+....
+POST /customers
+....
+
+
+==== Parameters
+
+
+|===
+|Type|Name|Description|Schema
+|**Body**|**customers** +
+__required__|customers|< <<_customer,Customer>> > array
+|===
+
+
+==== Responses
+
+
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|< <<_customer,Customer>> > array
+|**201**|Created|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `application/json;charset=UTF-8`
+
+
+==== Tags
+
+* customer-controller
+
+
+[[_findallcustomersusingget]]
+=== findAllCustomers
+....
+GET /customers
+....
+
+
+==== Responses
+
+
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|< <<_customer,Customer>> > array
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Produces
+
+* `application/json;charset=UTF-8`
+
+
+==== Tags
+
+* customer-controller
+
+
+[[_findcustomerbynameusingget]]
+=== findCustomerByName
+....
+GET /customers/byName
+....
+
+
+==== Parameters
+
+|===
+|Type|Name|Description|Schema
+|**Query**|**name** +
+__required__|name|string
+|===
+
+
+==== Responses
+
+
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_customer,Customer>>
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Produces
+
+* `application/json;charset=UTF-8`
+
+
+==== Tags
+
+* customer-controller
+
+
+[[_createcustomerusingpost]]
+=== createCustomer
+....
+POST /customers/new
+....
+
+
+==== Parameters
+
+
+|===
+|Type|Name|Description|Schema
+|**Body**|**customer** +
+__required__|customer|<<_customer,Customer>>
+|===
+
+
+==== Responses
+
+
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_customer,Customer>>
+|**201**|Created|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `application/json;charset=UTF-8`
+
+
+==== Tags
+
+* customer-controller
+
+
+[[_findcustomerusingget]]
+=== findCustomer
+....
+GET /customers/{customerId}
+....
+
+
+==== Parameters
+
+|===
+|Type|Name|Description|Schema
+|**Path**|**customerId** +
+__required__|customerId|integer (int64)
+|===
+
+
+==== Responses
+
+
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_ea38fb077199c0bf99608773419ea261,Optional«Customer»>>
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Produces
+
+* `application/json;charset=UTF-8`
+
+
+==== Tags
+
+* customer-controller
+
+
+
+
+
+
