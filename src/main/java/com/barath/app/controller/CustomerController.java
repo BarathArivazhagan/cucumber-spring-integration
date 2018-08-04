@@ -1,11 +1,13 @@
 package com.barath.app.controller;
 
+import java.lang.invoke.MethodHandles;
 import java.util.List;
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.StringUtils;
+import org.springframework.http.MediaType;
+import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,18 +20,20 @@ import com.barath.app.entity.Customer;
 import com.barath.app.service.CustomerService;
 
 @RestController
-@RequestMapping(value="/customer")
+@RequestMapping(value="/customers",produces= MediaType.APPLICATION_JSON_UTF8_VALUE)
 public class CustomerController {
 	
-	private static final Logger logger=LoggerFactory.getLogger(CustomerService.class);
+	private static final Logger logger=LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());	
+	
+	private final CustomerService customerService;
 	
 	
-	@Autowired
-	private CustomerService customerService;
-	
-	
-	
-	@PostMapping(value="/save")
+	public CustomerController(CustomerService customerService) {
+		super();
+		this.customerService = customerService;
+	}
+
+	@PostMapping(value="/new")
 	public Customer createCustomer(@RequestBody Customer customer){
 		
 		if( customer !=null){	
@@ -40,43 +44,32 @@ public class CustomerController {
 		return customer;
 	}
 	
-	@PostMapping(value="/saves")
-	public List<Customer> createCustomers(@RequestBody List<Customer> customers){
+	@PostMapping
+	public List<Customer> createCustomers(@RequestBody List<Customer> customers){	
 		
-		if( customers !=null){	
-			
-			customers=customerService.saveCustomers(customers);
-		}
+		Assert.notEmpty(customers, "customers to be saved cannot be empty");
+		return customerService.saveCustomers(customers);
 		
-		return customers;
 	}
 	
-	@GetMapping(value="/get/{customerId}")
-	public Customer findCustomer(@PathVariable Long customerId){
+	@GetMapping(value="/{customerId}")
+	public Optional<Customer> findCustomer(@PathVariable Long customerId){		
 		
-		Customer customer=null;
-		if( customerId !=null){	
-			
-			customer=customerService.getCustomer(customerId);
-		}
+		Assert.notNull(customerId, "customerId cannot be empty");
+		return customerService.getCustomer(customerId);
 		
-		return customer;
 	}
 	
 	
 	
-	@GetMapping(value="/get")
-	public Customer findCustomerWithName(@RequestParam(name="name") String customerName){
+	@GetMapping(value="/byName")
+	public Customer findCustomerByName(@RequestParam(name="name") String customerName){		
 		
-		Customer customer=null;
-		if( !StringUtils.isEmpty(customerName)){				
-			customer=customerService.getCustomerWithName(customerName);
-		}
-		
-		return customer;
+		Assert.notNull(customerName,"customerName cannot be empty");				
+		return customerService.getCustomerWithName(customerName);	
 	}
 	
-	@GetMapping(value="/getall")
+	@GetMapping
 	public List<Customer> findAllCustomers(){
 		
 		return customerService.getCustomers();

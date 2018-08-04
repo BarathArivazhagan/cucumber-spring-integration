@@ -1,15 +1,20 @@
 package com.barath.app.entity;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="CUSTOMER")
-public class Customer {
+public class Customer implements Serializable {
 	
+	
+	private static final long serialVersionUID = -345480692120254592L;
+
+
 	@Id
 	@Column(name="CUSTOMER_ID")
 	private Long customerId;
@@ -43,6 +48,11 @@ public class Customer {
 	public Customer() {
 		super();
 		
+	}
+
+	@Override
+	public String toString() {
+		return "Customer [customerId=" + customerId + ", customerName=" + customerName + "]";
 	}
 	
 	

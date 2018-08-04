@@ -1,10 +1,14 @@
-package com.barath.app.cucumber.test;
+package com.barath.app.bdd;
 
 import static org.junit.Assert.assertEquals;
 
+import java.lang.invoke.MethodHandles;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.assertj.core.api.BDDAssertions;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +19,7 @@ import cucumber.api.java.en.When;
 
 public class GetCustomerStepDefinitionTest extends AbstractSpringConfigurationTest{
 	
+	private static final Logger logger=LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 	private String customerName=null;
 	private int customerId;
 	private ResponseEntity<String> response=null;
@@ -24,11 +29,13 @@ public class GetCustomerStepDefinitionTest extends AbstractSpringConfigurationTe
 	public void the_customer_saved_with_customer_name_and_customer_id(String customerName, int customerId) throws Throwable {
 		
 		String url=buildUrl(HOST, PORT, "/customer/save");
+		logger.info("url {}",url);
 		Map<String, Object> requestMap=new HashMap<>();
 		requestMap.put("customerName", this.customerName);
 		requestMap.put("customerId", this.customerId);
 		HttpEntity<?> requestEntity=new HttpEntity<>(requestMap,getDefaultHttpHeaders());
-		response=invokeRESTCall(url, HttpMethod.POST, requestEntity);
+		response=invokeRESTCall(url, HttpMethod.POST, requestEntity);		
+		
 	}
 	
 	
@@ -38,7 +45,7 @@ public class GetCustomerStepDefinitionTest extends AbstractSpringConfigurationTe
 		Map<String,String> uriVariables=new HashMap<>();
 		uriVariables.put("customerId", String.valueOf(customerId));
 		String url=buildUrl(HOST, PORT, path,uriVariables);
-		System.out.println("URL "+url);
+		logger.info("url {}",url);
 		response=invokeRESTCall(url, HttpMethod.GET,null);
 	}
 	
@@ -47,7 +54,7 @@ public class GetCustomerStepDefinitionTest extends AbstractSpringConfigurationTe
 		Map<String,String> uriVariables=new HashMap<>();
 		uriVariables.put("customerName", customerName);
 		String url=buildUrl(HOST, PORT, path,uriVariables);
-		System.out.println("URL "+url);
+		logger.info("url {}",url);
 		response=invokeRESTCall(url, HttpMethod.GET,null);
 	}
 	
