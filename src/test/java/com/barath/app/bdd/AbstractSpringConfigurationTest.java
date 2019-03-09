@@ -12,6 +12,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.util.UriComponents;
@@ -22,6 +23,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 @SpringBootTest(classes = Application.class, webEnvironment = WebEnvironment.DEFINED_PORT)
 @ContextConfiguration
+@DirtiesContext
 public abstract class AbstractSpringConfigurationTest {
 	
 	

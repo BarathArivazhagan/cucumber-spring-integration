@@ -1,0 +1,22 @@
+= Api Documentation
+
+=== Version information
+[%hardbreaks]
+__Version__ : 1.0
+
+
+=== License information
+[%hardbreaks]
+__License__ : Apache 2.0
+__License URL__ : http://www.apache.org/licenses/LICENSE-2.0
+__Terms of service__ : urn:tos
+
+
+=== URI scheme
+[%hardbreaks]
+__Host__ : localhost:8082
+__BasePath__ : /
+
+
+
+
