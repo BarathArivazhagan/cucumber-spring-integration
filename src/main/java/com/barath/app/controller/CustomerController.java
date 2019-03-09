@@ -20,7 +20,7 @@ import com.barath.app.entity.Customer;
 import com.barath.app.service.CustomerService;
 
 @RestController
-@RequestMapping(value="/customers",produces= MediaType.APPLICATION_JSON_UTF8_VALUE)
+@RequestMapping(produces= MediaType.APPLICATION_JSON_UTF8_VALUE)
 public class CustomerController {
 	
 	private static final Logger logger=LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());	
@@ -33,7 +33,7 @@ public class CustomerController {
 		this.customerService = customerService;
 	}
 
-	@PostMapping(value="/new")
+	@PostMapping(value="/customer")
 	public Customer createCustomer(@RequestBody Customer customer){
 		
 		if( customer !=null){	
@@ -44,7 +44,7 @@ public class CustomerController {
 		return customer;
 	}
 	
-	@PostMapping
+	@PostMapping(value="/customers")
 	public List<Customer> createCustomers(@RequestBody List<Customer> customers){	
 		
 		Assert.notEmpty(customers, "customers to be saved cannot be empty");
@@ -52,7 +52,7 @@ public class CustomerController {
 		
 	}
 	
-	@GetMapping(value="/{customerId}")
+	@GetMapping(value="/customer/{customerId}")
 	public Optional<Customer> findCustomer(@PathVariable Long customerId){		
 		
 		Assert.notNull(customerId, "customerId cannot be empty");
@@ -62,16 +62,15 @@ public class CustomerController {
 	
 	
 	
-	@GetMapping(value="/byName")
+	@GetMapping(value="/customer/byName")
 	public Customer findCustomerByName(@RequestParam(name="name") String customerName){		
 		
 		Assert.notNull(customerName,"customerName cannot be empty");				
 		return customerService.getCustomerWithName(customerName);	
 	}
 	
-	@GetMapping
-	public List<Customer> findAllCustomers(){
-		
+	@GetMapping(value="/customers")
+	public List<Customer> findAllCustomers(){		
 		return customerService.getCustomers();
 	}
 	
