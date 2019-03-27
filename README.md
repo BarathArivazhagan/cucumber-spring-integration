@@ -1,11 +1,11 @@
 # cucumber-spring-integration
- ### Spring boot application integrated with cucumber test cases
+ #### spring boot application integrated with cucumber test cases
 
 This sample demonstrates writing the cucumber test cases to test the spring boot application using BDD style.
 
-### Branch Matrix
+#### Branch Matrix
 
-choose the branch before proceeding to further sections.
+Choose the branch before proceeding to further sections.
 
 <table>
 
@@ -36,7 +36,7 @@ choose the branch before proceeding to further sections.
 ### Development Steps : 
 
 
-<b>Step1</b> : To start with cucumber : 
+<b>step 1</b> : To start with cucumber : 
 
 Add the below dependencies to support Spring with Cucumber: 
 
@@ -67,7 +67,7 @@ Add the below dependencies to support Spring with Cucumber:
     <dependencies>
 ```
 
-<b>Step 2</b>: Define the Cucumber Runner Test
+<b>step 2</b>: Define the Cucumber Runner Test
 
 ```
 @RunWith(Cucumber.class)
@@ -77,7 +77,7 @@ public class CucumberRunnerTest {
 }
 ```
 
-<b>Step 3 </b> : Create a feature file and define the BDD steps using gherkin language
+<b>step 3</b> : Create a feature file and define the BDD steps using gherkin language
 
 Example : Feature describing the scenario of creating a customer with customer details
 
@@ -91,7 +91,7 @@ Feature: To save the customer with customer details
     And the response contains customer name "barath"
 ```
 
-<b> Step 4 </b> : When you run this feature file ```Run as -> Cucumber``` it generates the BDD style of java code. 
+<b>step 4</b> : When you run this feature file ```Run as -> Cucumber``` it generates the BDD style of java code. 
 Using which you can write the service logic. 
 
 
