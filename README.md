@@ -20,7 +20,7 @@ Choose the branch before proceeding to further sections.
     <td>4.2.5</td>
   </tr>
   <tr>
-    <td>1.0.0.RELEASE</td>
+    <td>1.0.0</td>
     <td>2.0.3.RELEASE</td>
     <td>1.2.5</td>
   </tr>
