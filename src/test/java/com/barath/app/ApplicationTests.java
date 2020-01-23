@@ -25,17 +25,16 @@ import com.barath.app.entity.Customer;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes= Application.class, webEnvironment = WebEnvironment.DEFINED_PORT)
+@SpringBootTest(classes = Application.class, webEnvironment = WebEnvironment.DEFINED_PORT)
 @DirtiesContext
 public class ApplicationTests {
-	
+
 	@Rule
 	public JUnitRestDocumentation restDocumentation = new JUnitRestDocumentation();
-	
+
 	private MockMvc mockMvc;
-	
+
 	private ObjectMapper mapper = new ObjectMapper();
 
 	@Autowired
@@ -44,21 +43,19 @@ public class ApplicationTests {
 	@Before
 	public void setUp() {
 		this.mockMvc = MockMvcBuilders.webAppContextSetup(this.context)
-				.apply(documentationConfiguration(this.restDocumentation)) 
-				.build();
+				.apply(documentationConfiguration(this.restDocumentation)).build();
 	}
+
 	@Test
 	public void testNewCustomer() throws Exception {
-		
+
 		Customer customer = new Customer(1L, "barath");
 		String customerJson = this.mapper.writeValueAsString(customer);
-		this.mockMvc.perform(post("/customers/new").contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)
-					.content(customerJson))
-					.andExpect(status().isOk()) 
-					.andDo(document("newuser"));
-		
+		this.mockMvc
+				.perform(
+						post("/customers/new").contentType(MediaType.APPLICATION_JSON_UTF8_VALUE).content(customerJson))
+				.andExpect(status().isOk()).andDo(document("newuser"));
+
 	}
-	
-	
 
 }

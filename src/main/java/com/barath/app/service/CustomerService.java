@@ -13,52 +13,51 @@ import com.barath.app.repository.CustomerRepository;
 
 @Service
 public class CustomerService {
-	
-	private static final Logger logger=LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
-	
+
+	private static final Logger logger = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
+
 	private final CustomerRepository customerRepository;
-	
+
 	public CustomerService(CustomerRepository customerRepository) {
-		this.customerRepository=customerRepository;
+		this.customerRepository = customerRepository;
 	}
-	
-	
-	public Customer saveCustomer(Customer customer){
-		
-		if( logger.isInfoEnabled()){
-			logger.info("Customer is saved with details {}",customer.toString());
+
+	public Customer saveCustomer(Customer customer) {
+
+		if (logger.isInfoEnabled()) {
+			logger.info("Customer is saved with details {}", customer.toString());
 		}
 		return this.customerRepository.save(customer);
 	}
-	
-	public List<Customer> saveCustomers(List<Customer> customers){
-		
-		if( logger.isInfoEnabled()){
-			logger.info("Customer is saved with details {}",customers);
+
+	public List<Customer> saveCustomers(List<Customer> customers) {
+
+		if (logger.isInfoEnabled()) {
+			logger.info("Customer is saved with details {}", customers);
 		}
 		return this.customerRepository.saveAll(customers);
 	}
-	
-	public Customer getCustomerWithName(String customerName){
-		
-		if( logger.isInfoEnabled()){
-			logger.info("Getting Customer with name {}",customerName);
-		}	
+
+	public Customer getCustomerWithName(String customerName) {
+
+		if (logger.isInfoEnabled()) {
+			logger.info("Getting Customer with name {}", customerName);
+		}
 		return this.customerRepository.findByCustomerName(customerName);
-		
+
 	}
-	
-	public Optional<Customer> getCustomer(Long customerId){
-		
-		if( logger.isInfoEnabled()){
-			logger.info("Getting Customer with Id {}",customerId);
-		}	
+
+	public Optional<Customer> getCustomer(Long customerId) {
+
+		if (logger.isInfoEnabled()) {
+			logger.info("Getting Customer with Id {}", customerId);
+		}
 		return this.customerRepository.findById(customerId);
-		
+
 	}
-	
-	public List<Customer> getCustomers(){
-		
+
+	public List<Customer> getCustomers() {
+
 		return this.customerRepository.findAll();
 	}
 

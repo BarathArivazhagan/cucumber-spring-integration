@@ -1,6 +1,5 @@
 package com.barath.app.bdd;
 
-
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,66 +24,54 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @ContextConfiguration
 @DirtiesContext
 public abstract class AbstractSpringConfigurationTest {
-	
-	
-	@Autowired(required=false)
+
+	@Autowired(required = false)
 	private TestRestTemplate restTemplate;
 	protected ObjectMapper mapper = new ObjectMapper();
-	protected static final String HOST="localhost";
-	protected static final String PORT="8082";
-	
-	
-	
+	protected static final String HOST = "localhost";
+	protected static final String PORT = "8082";
 
-	public TestRestTemplate getRestTemplate() {		
-		
-		return restTemplate !=null ? restTemplate : new TestRestTemplate();
+	public TestRestTemplate getRestTemplate() {
+
+		return restTemplate != null ? restTemplate : new TestRestTemplate();
 	}
 
 	public void setRestTemplate(TestRestTemplate restTemplate) {
 		this.restTemplate = restTemplate;
 	}
-	
-	public ResponseEntity<String> invokeRESTCall(String url,HttpMethod method,HttpEntity<?> requestEntity){
-		
-		return getRestTemplate().exchange(url,method,requestEntity, String.class);
+
+	public ResponseEntity<String> invokeRESTCall(String url, HttpMethod method, HttpEntity<?> requestEntity) {
+
+		return getRestTemplate().exchange(url, method, requestEntity, String.class);
 	}
-	
-	
-	
-	public HttpHeaders getDefaultHttpHeaders(){
-		HttpHeaders headers=new HttpHeaders();
+
+	public HttpHeaders getDefaultHttpHeaders() {
+		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON_UTF8);
 		return headers;
 	}
-	
-	
-	public String buildUrl(String host, String port, String path, Map<String,String> uriVariables, MultiValueMap<String,String> queryParams){
-			
-		
-			UriComponentsBuilder builder=UriComponentsBuilder.fromPath(path)
-						.host(host)
-						.port(port)
-						.scheme("http");
-			if(queryParams !=null && !queryParams.isEmpty()) builder.queryParams(queryParams);
-			UriComponents uriComponent= uriVariables !=null && !uriVariables.isEmpty() ?  builder.buildAndExpand(uriVariables) : builder.build();
-					
-			return uriComponent.toUri().toString();
-	}
-	
-	public String buildUrl(String host,String port,String path){
-		
-		return buildUrl(host, port, path,null,null);
+
+	public String buildUrl(String host, String port, String path, Map<String, String> uriVariables,
+			MultiValueMap<String, String> queryParams) {
+
+		UriComponentsBuilder builder = UriComponentsBuilder.fromPath(path).host(host).port(port).scheme("http");
+		if (queryParams != null && !queryParams.isEmpty())
+			builder.queryParams(queryParams);
+		UriComponents uriComponent = uriVariables != null && !uriVariables.isEmpty()
+				? builder.buildAndExpand(uriVariables)
+				: builder.build();
+
+		return uriComponent.toUri().toString();
 	}
 
-	public String buildUrl(String host,String port,String path,Map<String,String> uriVariables){
+	public String buildUrl(String host, String port, String path) {
 
-		return buildUrl(host, port, path,uriVariables,null);
+		return buildUrl(host, port, path, null, null);
 	}
-	
-	
-	
-	
-	
+
+	public String buildUrl(String host, String port, String path, Map<String, String> uriVariables) {
+
+		return buildUrl(host, port, path, uriVariables, null);
+	}
 
 }

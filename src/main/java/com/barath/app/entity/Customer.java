@@ -8,19 +8,16 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="CUSTOMER")
+@Table(name = "CUSTOMER")
 public class Customer implements Serializable {
-	
-	
+
 	private static final long serialVersionUID = -345480692120254592L;
 
-
 	@Id
-	@Column(name="CUSTOMER_ID")
+	@Column(name = "CUSTOMER_ID")
 	private Long customerId;
-	
-	
-	@Column(name="CUSTOMER_NAME")
+
+	@Column(name = "CUSTOMER_NAME")
 	private String customerName;
 
 	public Long getCustomerId() {
@@ -47,16 +44,12 @@ public class Customer implements Serializable {
 
 	public Customer() {
 		super();
-		
+
 	}
 
 	@Override
 	public String toString() {
 		return "Customer [customerId=" + customerId + ", customerName=" + customerName + "]";
 	}
-	
-	
-	
-	
 
 }
