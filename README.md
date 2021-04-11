@@ -16,8 +16,13 @@ Choose the branch before proceeding to further sections.
   </tr>
   <tr>
     <td>master</td>
-    <td>2.2.4.RELEASE</td>
-    <td>5.0.0</td>
+    <td>2.3.9.RELEASE</td>
+    <td>6.10.2</td>
+  </tr>
+  <tr>
+    <td>2.3.9</td>
+    <td>2.3.9.RELEASE</td>
+    <td>6.10.2</td>
   </tr>
   <tr>
     <td>2.1.3</td>
@@ -47,7 +52,7 @@ Add the below dependencies to support Spring with Cucumber:
 
 ```
 	<properties>		
-		<cucumber.version>5.0.0</cucumber.version>
+		<cucumber.version>6.10.2</cucumber.version>
 	</properties>
 
 	<dependencies>
@@ -69,6 +74,12 @@ Add the below dependencies to support Spring with Cucumber:
 	        <version>${cucumber.version}</version>
 	        <scope>test</scope>
 	    </dependency>
+		<dependency>
+		    <groupId>io.cucumber</groupId>
+		    <artifactId>cucumber-spring</artifactId>
+		    <version>${cucumber.version}</version>
+		    <scope>test</scope>
+		</dependency>
     <dependencies>
 ```
 
@@ -126,4 +137,8 @@ Using which you can write the service logic.
 
 ```
 
-> **_NOTE:_**  Run cucumber tests after starting the application.
+<b>step 5</b> : Run the tests and check the output under output folder
+
+```
+mvn test
+```

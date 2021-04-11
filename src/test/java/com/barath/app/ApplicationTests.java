@@ -2,7 +2,6 @@ package com.barath.app;
 
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.documentationConfiguration;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -22,7 +21,6 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import com.barath.app.entity.Customer;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @RunWith(SpringRunner.class)
@@ -53,7 +51,7 @@ public class ApplicationTests {
 		String customerJson = this.mapper.writeValueAsString(customer);
 		this.mockMvc
 				.perform(
-						post("/customers/new").contentType(MediaType.APPLICATION_JSON_UTF8_VALUE).content(customerJson))
+						post("/customer").contentType(MediaType.APPLICATION_JSON).content(customerJson))
 				.andExpect(status().isOk()).andDo(document("newuser"));
 
 	}

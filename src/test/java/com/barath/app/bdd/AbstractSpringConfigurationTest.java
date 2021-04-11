@@ -2,6 +2,7 @@ package com.barath.app.bdd;
 
 import java.util.Map;
 
+import org.junit.Before;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
@@ -13,16 +14,22 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.util.MultiValueMap;
+import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.barath.app.Application;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import io.cucumber.spring.CucumberContextConfiguration;
+
 @SpringBootTest(classes = Application.class, webEnvironment = WebEnvironment.DEFINED_PORT)
 @ContextConfiguration
-@DirtiesContext
+@DirtiesContext( classMode = DirtiesContext.ClassMode.AFTER_CLASS )
+@CucumberContextConfiguration
 public abstract class AbstractSpringConfigurationTest {
 
 	@Autowired(required = false)
@@ -30,6 +37,18 @@ public abstract class AbstractSpringConfigurationTest {
 	protected ObjectMapper mapper = new ObjectMapper();
 	protected static final String HOST = "localhost";
 	protected static final String PORT = "8082";
+	
+	protected MockMvc mockMvc;
+	
+	@Autowired
+	private WebApplicationContext context;
+	
+	@Before
+	public void setUp() {
+		this.mockMvc = MockMvcBuilders.webAppContextSetup(this.context)
+				.build();
+	}
+
 
 	public TestRestTemplate getRestTemplate() {
 
@@ -47,7 +66,7 @@ public abstract class AbstractSpringConfigurationTest {
 
 	public HttpHeaders getDefaultHttpHeaders() {
 		HttpHeaders headers = new HttpHeaders();
-		headers.setContentType(MediaType.APPLICATION_JSON_UTF8);
+		headers.setContentType(MediaType.APPLICATION_JSON);
 		return headers;
 	}
 

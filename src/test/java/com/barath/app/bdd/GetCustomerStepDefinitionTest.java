@@ -25,7 +25,8 @@ public class GetCustomerStepDefinitionTest extends AbstractSpringConfigurationTe
 	@Given("^the customer saved with customer name \"([^\"]*)\" and customer id (\\d+)$")
 	public void the_customer_saved_with_customer_name_and_customer_id(String customerName, int customerId)
 			throws Throwable {
-
+		
+		System.out.println(PORT);
 		String url = buildUrl(HOST, PORT, "/customer");
 		logger.info("url {}", url);
 		Map<String, Object> requestMap = new HashMap<>();
