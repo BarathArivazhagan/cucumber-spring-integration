@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
+import org.springframework.lang.NonNull;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,7 +21,7 @@ import com.barath.app.entity.Customer;
 import com.barath.app.service.CustomerService;
 
 @RestController
-@RequestMapping(produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+@RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE)
 public class CustomerController {
 
 	private static final Logger logger = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
@@ -33,14 +34,9 @@ public class CustomerController {
 	}
 
 	@PostMapping(value = "/customer")
-	public Customer createCustomer(@RequestBody Customer customer) {
+	public Customer createCustomer(@RequestBody @NonNull Customer customer) {
 
-		if (customer != null) {
-
-			customer = customerService.saveCustomer(customer);
-		}
-
-		return customer;
+		return customerService.saveCustomer(customer);
 	}
 
 	@PostMapping(value = "/customers")
